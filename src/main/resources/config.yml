@@ -1,0 +1,2 @@
+send-resource-pack-on-join: true
+force-resource-pack-on-load: false
