@@ -31,13 +31,13 @@ public class GiveModelCommand implements CommandExecutor, TabCompleter {
                 player.getInventory().addItem(diamondModels.crown2());
                 return true;
             }else if(args[0].equalsIgnoreCase("paper_bag")){
-                player.getInventory().addItem(diamondModels.propeller_hat());
+                player.getInventory().addItem(diamondModels.paper_bag());
                 return true;
             }else if(args[0].equalsIgnoreCase("pirate_hat")){
                 player.getInventory().addItem(diamondModels.pirate_hat());
                 return true;
             }else if(args[0].equalsIgnoreCase("propeller_hat")){
-                player.getInventory().addItem(diamondModels.pirate_hat());
+                player.getInventory().addItem(diamondModels.propeller_hat());
                 return true;
             }else if(args[0].equalsIgnoreCase("speed_carton_car")){
                 player.getInventory().addItem(diamondModels.speed_carton_car());
@@ -57,6 +57,9 @@ public class GiveModelCommand implements CommandExecutor, TabCompleter {
             }else if(args[0].equalsIgnoreCase("policebaton3")){
                 player.getInventory().addItem(stickModels.policeBaton3());
                 return true;
+            }else if(args[0].equalsIgnoreCase("tucan")){
+                player.getInventory().addItem(diamondModels.toucan());
+                return true;
             }
         }
         player.getInventory().addItem(diamondModels.crown());
@@ -73,13 +76,13 @@ public class GiveModelCommand implements CommandExecutor, TabCompleter {
 
             //list.add("policeshield"); soon
             list.add("crown");
-            list.add("crown/2");
+            list.add("crown2");
             list.add("paper_bag");
             list.add("pirate_hat");
             list.add("propeller_hat");
             list.add("speed_carton_car");
             list.add("sport_camera");
-            list.add("toucan");
+            //list.add("toucan"); soon
             return list;
         }
         return null;
