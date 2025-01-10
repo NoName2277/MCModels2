@@ -40,10 +40,10 @@ public class GiveModelCommand implements CommandExecutor, TabCompleter {
                 player.getInventory().addItem(diamondModels.pirate_hat());
                 return true;
             }else if(args[0].equalsIgnoreCase("speed_carton_car")){
-                player.getInventory().addItem(diamondModels.pirate_hat());
+                player.getInventory().addItem(diamondModels.speed_carton_car());
                 return true;
             }else if(args[0].equalsIgnoreCase("sport_camera")){
-                player.getInventory().addItem(diamondModels.pirate_hat());
+                player.getInventory().addItem(diamondModels.sport_camera());
                 return true;
             }else if(args[0].equalsIgnoreCase("toucan")){
                 player.getInventory().addItem(diamondModels.pirate_hat());
@@ -68,9 +68,10 @@ public class GiveModelCommand implements CommandExecutor, TabCompleter {
         if(args.length==1){
             ArrayList<String> list = new ArrayList<>();
             list.add("policebaton");
-            list.add("policebaton/2");
-            list.add("policebaton/3");
-            list.add("policeshield");
+            list.add("policebaton2");
+            list.add("policebaton3");
+
+            //list.add("policeshield"); soon
             list.add("crown");
             list.add("crown/2");
             list.add("paper_bag");

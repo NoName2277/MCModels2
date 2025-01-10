@@ -18,6 +18,7 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
     @Override
     public void onEnable() {
         diamondModels = new DiamondModels();
+        stickModels = new StickModels();
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
@@ -27,7 +28,7 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
 
     }
 
-    String ver = getServer().getVersion();
+    private String ver = getServer().getVersion();
 
     @EventHandler
     public void sendTxTOnJoin(PlayerJoinEvent event) {
