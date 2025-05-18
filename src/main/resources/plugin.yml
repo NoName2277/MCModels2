@@ -1,7 +1,7 @@
 name: MCModels2
 version: '${project.version}'
 main: pl.noname.mcmodels2.Main
-api-version: '1.19'
+api-version: '1.15'
 commands:
   dajmodel:
     description: add model

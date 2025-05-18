@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.noname.mcmodels2.commands.GiveModelCommand;
 import pl.noname.mcmodels2.models.DiamondModels;
 import pl.noname.mcmodels2.models.StickModels;
+import pl.noname.mcmodels2.models.VersionUtils;
 
 public final class Main extends JavaPlugin implements Runnable, Listener {
 
@@ -25,24 +26,11 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
         getCommand("dajmodel").setExecutor(new GiveModelCommand(diamondModels, stickModels));
         getCommand("dajmodel").setTabCompleter(new GiveModelCommand(diamondModels, stickModels));
         getServer().getScheduler().runTaskTimer(this, this, 20L, 20L);
-
+        getServer().getLogger().info("Plugin By NoName0");
+        getServer().getLogger().info("Github: https://github.com/NoName2277");
     }
 
     private String ver = getServer().getVersion();
-
-    @EventHandler
-    public void sendTxTOnJoin(PlayerJoinEvent event) {
-        if (getConfig().getBoolean("send-resource-pack-on-join", true)) {
-            if(this.getServer().getVersion().contains("1.21.4")){
-                getLogger().info("1.21.4 texture pack send!");
-                event.getPlayer().setResourcePack("https://www.dropbox.com/scl/fi/vs37fg0s7539m8fjx1jun/MCModels2-for-1.21.4.zip?rlkey=hjvo6m1gocnk84kblpx71m2pr&st=omgkb59s&dl=1",
-                        null, getConfig().getBoolean("force-resource-pack-on-load"));
-            }else
-                event.getPlayer().setResourcePack("https://www.dropbox.com/scl/fi/17m10onavbc1lz4oc4opb/mcmodels2.zip?rlkey=190g3tl08l0g4r6saaiho7qmo&dl=1",
-                        null, getConfig().getBoolean("force-resource-pack-on-load"));
-        }
-        return;
-    }
 
 
     @Override
@@ -58,4 +46,28 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
             diamondModels.crownEffect(player);
         }
     }
+
+    @EventHandler
+    public void sendTxTOnJoin(PlayerJoinEvent event) {
+        if (getConfig().getBoolean("send-resource-pack-on-join", true)) {
+            String mcVersion = VersionUtils.getMinecraftVersion(getServer());
+
+            if (VersionUtils.isAtLeastVersion(mcVersion, "1.21.4")) {
+                getLogger().info("Wersja " + mcVersion + " => wysylam paczke 1.21.4+");
+                event.getPlayer().setResourcePack(
+                        "https://www.dropbox.com/scl/fi/vs37fg0s7539m8fjx1jun/MCModels2-for-1.21.4.zip?rlkey=hjvo6m1gocnk84kblpx71m2pr&st=omgkb59s&dl=1",
+                        null,
+                        getConfig().getBoolean("force-resource-pack-on-load")
+                );
+            } else {
+                getLogger().info("Wersja " + mcVersion + " => wysylam paczke 1.18 - 1.21.3");
+                event.getPlayer().setResourcePack(
+                        "https://www.dropbox.com/scl/fi/17m10onavbc1lz4oc4opb/mcmodels2.zip?rlkey=190g3tl08l0g4r6saaiho7qmo&dl=1",
+                        null,
+                        getConfig().getBoolean("force-resource-pack-on-load")
+                );
+            }
+        }
+    }
+
 }
