@@ -11,7 +11,7 @@ public class VersionUtils {
         Pattern pattern = Pattern.compile("\\(MC: ([^)]+)\\)");
         Matcher matcher = pattern.matcher(version);
         if (matcher.find()) {
-            return matcher.group(1); // np. "1.20.4"
+            return matcher.group(1);
         }
         return "unknown";
     }
