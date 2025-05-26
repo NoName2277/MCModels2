@@ -38,7 +38,7 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
         getServer().getLogger().info("Plugin By NoName0");
         getServer().getLogger().info("Github: https://github.com/NoName2277");
 
-        Metrics metrics = new Metrics(this, 25969);
+        Metrics metrics = new Metrics(this, id);
         metrics.addCustomChart(new SingleLineChart("players", new Callable<Integer>(){
             @Override
             public Integer call() throws Exception {
