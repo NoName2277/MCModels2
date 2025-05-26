@@ -1,20 +1,26 @@
 package pl.noname.mcmodels2;
 
-import org.bukkit.Server;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SingleLineChart;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.noname.mcmodels2.commands.GiveModelCommand;
+import pl.noname.mcmodels2.commands.ModelGuiCommand;
 import pl.noname.mcmodels2.models.DiamondModels;
 import pl.noname.mcmodels2.models.StickModels;
 import pl.noname.mcmodels2.models.VersionUtils;
+
+import java.util.concurrent.Callable;
 
 public final class Main extends JavaPlugin implements Runnable, Listener {
 
     private DiamondModels diamondModels;
     private StickModels stickModels;
+
+    private ModelGui gui;
 
     @Override
     public void onEnable() {
@@ -22,15 +28,24 @@ public final class Main extends JavaPlugin implements Runnable, Listener {
         stickModels = new StickModels();
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+        getServer().getPluginManager().registerEvents(stickModels, this);
         getServer().getPluginManager().registerEvents(this, this);
-        getCommand("dajmodel").setExecutor(new GiveModelCommand(diamondModels, stickModels));
-        getCommand("dajmodel").setTabCompleter(new GiveModelCommand(diamondModels, stickModels));
+        gui = new ModelGui(diamondModels, stickModels);
+        gui.createSkinGui();
+        getServer().getPluginManager().registerEvents(gui, this);
+        getCommand("dajmodel").setExecutor(new ModelGuiCommand(gui));
         getServer().getScheduler().runTaskTimer(this, this, 20L, 20L);
         getServer().getLogger().info("Plugin By NoName0");
         getServer().getLogger().info("Github: https://github.com/NoName2277");
-    }
 
-    private String ver = getServer().getVersion();
+        Metrics metrics = new Metrics(this, 25969);
+        metrics.addCustomChart(new SingleLineChart("players", new Callable<Integer>(){
+            @Override
+            public Integer call() throws Exception {
+                return Bukkit.getOnlinePlayers().size();
+            }
+        }));
+    }
 
 
     @Override
