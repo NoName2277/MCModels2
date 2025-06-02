@@ -22,7 +22,7 @@ public class ModelGui implements Listener {
         this.stickModels = stickModels;
     }
     public void createSkinGui(){
-        skinGui = Bukkit.createInventory(null, 20, "§a§lWybierz Model");
+        skinGui = Bukkit.createInventory(null, 18, "§a§lWybierz Model");
 
         skinGui.setItem(0, diamondModels.crown());
         skinGui.setItem(1, diamondModels.crown2());
